@@ -1,6 +1,25 @@
-/**
- * Name     : LAB003_Riviere
- * File     : Controller.cpp
- * Authors  : Gaétan Zwick, Marco Maziero
- * Date     : 14.04.2021
- */
+#include "Controller.h"
+
+Controller* Controller::getInstance() {
+    if(instance == nullptr){
+        instance = new Controller();
+    }
+    return instance;
+}
+
+Controller::~Controller() {
+    delete instance;
+    // TODO
+}
+
+void Controller::showMenu() {
+    // TODO
+}
+
+void Controller::display() {
+    // TODO
+}
+
+void Controller::nextTurn() {
+    // TODO
+}
