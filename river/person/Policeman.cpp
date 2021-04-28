@@ -10,6 +10,5 @@
 Policeman::Policeman(const std::string &name) : Person(name, true) {}
 
 bool Policeman::canStayWith(const Container &c) const {
-    // TODO
-    return false;
+    return true;
 }

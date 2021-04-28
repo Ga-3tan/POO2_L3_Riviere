@@ -32,6 +32,10 @@ Container& Container::remove(Person* person){
     people.remove(person);
 }
 
+std::size_t Container::size() const {
+    return people.size();
+}
+
 bool Container::validateState() {
     // TODO
     return false;
