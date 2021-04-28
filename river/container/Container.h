@@ -73,6 +73,11 @@ public:
      * @return The modified container
      */
     Container& remove(Person* person);
+
+    /**
+     * Gives the current container size
+     */
+    size_t size() const;
 };
 
 #endif //POO2_L3_RIVIERE_CONTAINER_H

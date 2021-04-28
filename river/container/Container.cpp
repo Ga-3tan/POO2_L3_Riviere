@@ -36,3 +36,7 @@ bool Container::validateState() {
     // TODO
     return false;
 }
+
+size_t Container::size() const {
+    return people.size();
+}
