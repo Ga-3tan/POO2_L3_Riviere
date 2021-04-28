@@ -25,7 +25,7 @@ public:
      * @param c The container containing the people
      * @return True if the person can get along with the others
      */
-    bool canStayWith(const Container& c) const;
+    bool canStayWith(const Container& c) const override;
 };
 
 #endif //POO2_L3_RIVIERE_FATHER_H

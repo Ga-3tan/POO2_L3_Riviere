@@ -6,8 +6,10 @@
  */
 
 #include <iostream>
+#include "river/River.h"
 
 int main() {
-    std::cout << "Hello, Märcö!" << std::endl;
+    River river;
+    river.start();
     return 0;
 }

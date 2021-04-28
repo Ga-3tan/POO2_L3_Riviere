@@ -8,13 +8,13 @@
 #ifndef POO2_L3_RIVIERE_CONTAINER_H
 #define POO2_L3_RIVIERE_CONTAINER_H
 
-#include <iterator>
+class Container;
+
 #include "../person/Person.h"
+#include <iterator>
 #include <list>
 #include <string>
 #include <cstdlib>
-
-class Container;
 
 /**
  * Allows to write the container inside an output stream
@@ -25,7 +25,7 @@ class Container;
 std::ostream& operator<<(std::ostream& os, const Container& container);
 
 class Container {
-private:
+protected:
     std::string name;
 protected:
     std::list<Person*> people;

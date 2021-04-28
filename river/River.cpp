@@ -9,10 +9,11 @@
 #include "Controller.h"
 
 void River::start() {
-    Controller* riverGame = Controller::getInstance();
+    //Controller* riverGame = Controller::getInstance();
+    Controller riverGame;
 
     while (true) {
-        riverGame->nextTurn();
+        riverGame.nextTurn();
     }
 }
 
