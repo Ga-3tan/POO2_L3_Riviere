@@ -43,6 +43,11 @@ public:
      * @return True if the person can get along with the others
      */
     virtual bool canStayWith(const Container& c) const = 0;
+
+    /**
+     * Default destructor
+     */
+    virtual ~Person() = default;
 };
 
 #endif //POO2_L3_RIVIERE_PERSON_H

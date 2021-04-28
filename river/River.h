@@ -11,8 +11,6 @@
 #include "Controller.h"
 
 class River {
-private:
-    Controller controller;
 public:
     void start();
 };

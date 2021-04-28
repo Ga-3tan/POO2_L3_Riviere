@@ -15,19 +15,16 @@
 class Controller {
 private:
     std::size_t turn;
-    Bank leftSide;
-    Bank rightSide;
-    Boat boat;
+    Bank* leftSide;
+    Bank* rightSide;
+    Boat* boat;
 protected:
     static Controller* instance;
 
     /**
      * Creates a new controller with its attributes
      */
-    Controller() : turn(0),
-             leftSide(Bank("Gauche")),
-             rightSide(Bank("Left")),
-             boat(Boat("Bateau")) {};
+    Controller();
 
 public:
     /**
