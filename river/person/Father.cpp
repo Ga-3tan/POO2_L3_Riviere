@@ -10,6 +10,5 @@
 Father::Father(const std::string &name) : Person(name, true) {}
 
 bool Father::canStayWith(const Container &c) const {
-    // TODO
-    return false;
+    return true;
 }

@@ -19,6 +19,6 @@ bool Robber::canStayWith(const Container &c) const {
     }
 
     // If there is no policeman, cannot be with other members
-    if(c.size() && !isPolicemanHere) return false;
-    return true
+    if(c.size() > 1 && !isPolicemanHere) return false;
+    return true;
 }
