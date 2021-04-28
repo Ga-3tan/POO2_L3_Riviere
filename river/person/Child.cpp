@@ -20,6 +20,6 @@ bool Child::canStayWith(const Container &c) const {
         if(typeid(*p) == typeid(Father)) fatherIsHere = true;
     }
 
-    // Son cannot stay with mother if father isn ot present
+    // Son cannot stay with mother if father is not present
     return parentsPresence(motherIsHere, fatherIsHere);
 }

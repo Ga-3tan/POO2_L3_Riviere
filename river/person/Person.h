@@ -12,6 +12,8 @@ class Person;
 
 #include <string>
 #include "../container/Container.h"
+#include <typeinfo>
+#include <iostream>
 
 class Person {
 private:
