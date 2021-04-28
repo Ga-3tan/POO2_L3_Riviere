@@ -6,9 +6,19 @@
  */
 
 #include "Robber.h"
+#include "Policeman.h"
 
 Robber::Robber(const std::string &name) : Person(name, false) {}
 
 bool Robber::canStayWith(const Container &c) const {
-    return false;
+    bool isPolicemanHere = false;
+
+    // Iterates through the list of Person
+    for (auto it = c.begin(); it != c.end(); ++it) {
+        if(typeid(*it) == typeid(Policeman)) isPolicemanHere = true;
+    }
+
+    // If there is no policeman, cannot be with other members
+    if(c.size() > 1 && !isPolicemanHere) return false;
+    return true;
 }

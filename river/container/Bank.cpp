@@ -11,10 +11,6 @@ Bank::Bank(const std::string &name) : Container(name) {
 
 }
 
-bool Bank::validateState() {
-
-}
-
 std::ostream& Bank::toStream(std::ostream& os) const {
 
 }

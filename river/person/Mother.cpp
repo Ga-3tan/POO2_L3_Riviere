@@ -10,6 +10,5 @@
 Mother::Mother(const std::string &name) : Person(name, true) {}
 
 bool Mother::canStayWith(const Container &c) const {
-    // TODO
-    return false;
+    return true;
 }
