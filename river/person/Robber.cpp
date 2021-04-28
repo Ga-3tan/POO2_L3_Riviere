@@ -15,9 +15,10 @@ bool Robber::canStayWith(const Container &c) const {
 
     // Iterates through the list of Person
     for (auto it = c.begin(); it != c.end(); ++it) {
-        typeid(*it) == typeid(Policeman) isPolicemanHere = true;
+        if(typeid(*it) == typeid(Policeman)) isPolicemanHere = true;
     }
 
     // If there is no policeman, cannot be with other members
-    return false;
+    if(c.size() && !isPolicemanHere) return false;
+    return true
 }

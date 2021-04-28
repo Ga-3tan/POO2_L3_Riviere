@@ -9,9 +9,9 @@
 #define POO2_L3_RIVIERE_SON_H
 
 #include <string>
-#include "Person.h"
+#include "Child.h"
 
-class Son : public Person {
+class Son : public Child {
 public:
     /**
      * Represents a son
@@ -20,12 +20,12 @@ public:
     explicit Son(const std::string& name);
 
     /**
-     * Checks if the current person can stay with
-     * the people contained in the given list
-     * @param c The container containing the people
-     * @return True if the person can get along with the others
+     * Returns the rule specific to the child if its a son or a daughter
+     * @param mother The mother is present with the child
+     * @param father  The father is present with the child
+     * @return The child can stay with the given parents
      */
-    bool canStayWith(const Container& c) const;
+    bool parentsPresence(bool mother, bool father) const override;
 };
 
 #endif //POO2_L3_RIVIERE_SON_H
