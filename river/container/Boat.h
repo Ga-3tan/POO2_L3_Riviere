@@ -19,7 +19,7 @@ public:
      * Constructs a new boat
      * @param name The boat name
      */
-    Boat(const std::string &name);
+    explicit Boat(const std::string &name);
 
     /**
      * Validates that every person in the container can

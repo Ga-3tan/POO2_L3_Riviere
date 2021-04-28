@@ -17,7 +17,7 @@ public:
      * Represents a robber
      * @param name The name of the robber
      */
-    Robber(const std::string& name) : Person(name, false) {}
+    explicit Robber(const std::string& name);
 
     /**
      * Checks if the current person can stay with

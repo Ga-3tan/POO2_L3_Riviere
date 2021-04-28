@@ -7,6 +7,8 @@
 
 #include "Daughter.h"
 
+Daughter::Daughter(const std::string &name) : Person(name, false) {}
+
 bool Daughter::canStayWith(const Container &c) const {
     // TODO
     return false;

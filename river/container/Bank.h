@@ -16,7 +16,7 @@ public:
      * Constructs a new river bank
      * @param name The bank name
      */
-    Bank(const std::string &name);
+    explicit Bank(const std::string &name);
 
     /**
      * Writes the container inside the given output stream

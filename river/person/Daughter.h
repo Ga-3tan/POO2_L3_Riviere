@@ -17,7 +17,7 @@ public:
      * Represents a daughter
      * @param name The name of the daughter
      */
-    Daughter(const std::string& name) : Person(name, false) {}
+    explicit Daughter(const std::string& name);
 
     /**
      * Checks if the current person can stay with

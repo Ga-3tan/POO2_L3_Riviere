@@ -7,6 +7,9 @@
 
 #include "Person.h"
 
+Person::Person(std::string name, bool isDriver)
+: name(std::move(name)), isDriver(isDriver) {}
+
 bool Person::canDrive() const {
     return isDriver;
 }
@@ -14,4 +17,3 @@ bool Person::canDrive() const {
 std::string Person::getName() const {
     return name;
 }
-

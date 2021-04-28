@@ -21,7 +21,7 @@ protected:
      * @param name The name of the person
      * @param isDriver Boolean telling if the person can drive
      */
-    Person(std::string name, bool isDriver) : name(name), isDriver(isDriver) {}
+    Person(std::string name, bool isDriver);
 
 public:
     /**

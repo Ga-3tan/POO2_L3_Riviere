@@ -17,7 +17,7 @@ public:
      * Represents a father
      * @param name The name of the father
      */
-    Father(const std::string& name) : Person(name, true) {}
+    explicit Father(const std::string& name);
 
     /**
      * Checks if the current person can stay with

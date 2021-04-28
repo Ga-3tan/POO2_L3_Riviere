@@ -7,6 +7,8 @@
 
 #include "Robber.h"
 
+Robber::Robber(const std::string &name) : Person(name, false) {}
+
 bool Robber::canStayWith(const Container &c) const {
     return false;
 }

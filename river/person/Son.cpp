@@ -7,6 +7,8 @@
 
 #include "Son.h"
 
+Son::Son(const std::string &name) : Person(name, false) {}
+
 bool Son::canStayWith(const Container &c) const {
     // TODO
     return false;
