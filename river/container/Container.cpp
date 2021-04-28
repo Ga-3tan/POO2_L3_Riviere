@@ -37,8 +37,17 @@ std::size_t Container::size() const {
 }
 
 bool Container::validateState() {
-    // TODO
+    if (!people.empty()) {
+        for (auto p : people) {
+            p->canStayWith(people);
+        }
+    }
     return false;
+}
+
+std::ostream& Container::toStream(std::ostream& os) const {
+    for (Person* p : people)
+        os << p << " ";
 }
 
 size_t Container::size() const {

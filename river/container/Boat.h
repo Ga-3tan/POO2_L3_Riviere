@@ -13,13 +13,13 @@
 
 class Boat : public Container {
 private:
-    Bank& bank;
+    Bank* bank;
 public:
     /**
      * Constructs a new boat
      * @param name The boat name
      */
-    explicit Boat(const std::string &name);
+    explicit Boat(const std::string &name, Bank* bank);
 
     /**
      * Validates that every person in the container can
@@ -41,13 +41,13 @@ public:
      * Sets the bank where the boat is
      * @param bank The current bank
      */
-    void setBank(Bank& bank);
+    void setBank(Bank* bank);
 
     /**
      * Gets the bank where the boat is
      * @return The current bank
      */
-    Bank& getBank() const;
+    Bank* getBank() const;
 };
 
 #endif //POO2_L3_RIVIERE_BOAT_H
