@@ -27,8 +27,8 @@ std::ostream& operator<<(std::ostream& os, const Container& container);
 class Container {
 private:
     std::string name;
-    std::list<Person*> people;
 protected:
+    std::list<Person*> people;
     /**
      * Creates a container with a given name
      * @param name
