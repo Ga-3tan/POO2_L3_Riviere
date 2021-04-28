@@ -19,6 +19,9 @@ bool Robber::canStayWith(const Container &c) const {
     }
 
     // If there is no policeman, cannot be with other members
-    if(c.size() > 1 && !isPolicemanHere) return false;
+    if(c.size() > 1 && !isPolicemanHere) {
+        std::cout << "There is no policeman, the robber cannot be alone with the family" << std::endl;
+        return false;
+    }
     return true;
 }

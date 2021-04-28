@@ -10,5 +10,11 @@
 Son::Son(const std::string &name) : Child(name) {}
 
 bool Son::parentsPresence(bool mother, bool father) const {
-    return !(mother && !father);
+    if (!(mother && !father)) {
+        std::cout << "A son cannot be alone with the mother if the father is not present" << std::endl;
+        return false;
+    } else {
+        return true;
+    }
+    // return !(mother && !father);
 }
