@@ -18,20 +18,12 @@ private:
     Bank* leftSide;
     Bank* rightSide;
     Boat* boat;
-protected:
-    static Controller* instance;
 
+public:
     /**
      * Creates a new controller with its attributes
      */
     Controller();
-
-public:
-    /**
-     * Returns the Singleton instance of the controller class
-     * @return The singleton instance
-     */
-    static Controller* getInstance();
 
     /**
      * Deletes the dynamically attributes pointers
@@ -66,9 +58,5 @@ public:
      */
     Controller& operator=(const Controller& c) = delete;
 };
-
-// Sets up the static instance
-Controller* Controller::instance = nullptr;
-
 
 #endif //POO2_L3_RIVIERE_CONTROLLER_H

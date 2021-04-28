@@ -8,6 +8,8 @@
 #ifndef POO2_L3_RIVIERE_PERSON_H
 #define POO2_L3_RIVIERE_PERSON_H
 
+class Person;
+
 #include <string>
 #include "../container/Container.h"
 

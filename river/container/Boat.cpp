@@ -27,7 +27,7 @@ bool Boat::validateState() {
 }
 
 std::ostream& Boat::toStream(std::ostream& os) const {
-    os << "Bateau: < " << Container::toStream(os) << ">";
+    return Container::toStream(os << name << ": < ") << " >";
 }
 
 void Boat::setBank(Bank* bank) {

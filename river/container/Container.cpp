@@ -26,10 +26,12 @@ std::ostream& operator<< (std::ostream& os, const Container& container){
 
 Container& Container::add(Person* person){
     people.push_back(person);
+    return *this;
 }
 
 Container& Container::remove(Person* person){
     people.remove(person);
+    return *this;
 }
 
 std::size_t Container::size() const {
@@ -39,7 +41,7 @@ std::size_t Container::size() const {
 bool Container::validateState() {
     if (!people.empty()) {
         for (auto p : people) {
-            p->canStayWith(people);
+            p->canStayWith(*this);
         }
     }
     return false;
@@ -47,9 +49,6 @@ bool Container::validateState() {
 
 std::ostream& Container::toStream(std::ostream& os) const {
     for (Person* p : people)
-        os << p << " ";
-}
-
-size_t Container::size() const {
-    return people.size();
+        os << p->getName() << " ";
+    return os;
 }

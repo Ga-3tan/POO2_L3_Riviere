@@ -1,6 +1,5 @@
 #include <iostream>
 #include "Controller.h"
-#include "person/Person.h"
 #include "person/Mother.h"
 #include "person/Father.h"
 #include "person/Son.h"
@@ -10,17 +9,11 @@
 
 using namespace std;
 
-Controller* Controller::getInstance() {
-    if(instance == nullptr){
-        instance = new Controller();
-    }
-    return instance;
-}
-
 Controller::Controller() : turn(0),
                            leftSide(new Bank("Gauche")),
                            rightSide(new Bank("Left")),
-                           boat(new Boat("Bateau")) {
+                           boat(new Boat("Bateau", leftSide)) {
+
     // Adds all the persons on the left bank
     leftSide->add(new Father("pere"));
     leftSide->add(new Mother("mere"));
@@ -47,19 +40,16 @@ Controller::~Controller() {
     delete leftSide;
     delete rightSide;
     delete boat;
-
-    // Deletes the game instance
-    delete instance;
 }
 
 void Controller::showMenu() {
-    cout << "p\t\t: afficher" << endl
-         << "e\t\t: embarquer <nom>" << endl
-         << "d\t\t: debarquer <nom>" << endl
-         << "m\t\t: deplacer bateau" << endl
-         << "r\t\t: reinitialiser" << endl
-         << "q\t\t: quitter" << endl
-         << "h\t\t: menu" << endl;
+    cout << "p\t: afficher" << endl
+         << "e <nom>\t: embarquer <nom>" << endl
+         << "d <nom>\t: debarquer <nom>" << endl
+         << "m\t: deplacer bateau" << endl
+         << "r\t: reinitialiser" << endl
+         << "q\t: quitter" << endl
+         << "h\t: menu" << endl;
 }
 
 void Controller::display() {
@@ -74,8 +64,12 @@ void Controller::display() {
 }
 
 void Controller::nextTurn() {
+    // TODO
     if (!turn) showMenu();
     display();
+    Person* p = *leftSide->begin();
+    leftSide->remove(p);
+    rightSide->add(p);
     string input;
     cin >> input;
 }

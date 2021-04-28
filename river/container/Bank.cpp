@@ -7,10 +7,8 @@
 
 #include "Bank.h"
 
-Bank::Bank(const std::string &name) : Container(name) {
-
-}
+Bank::Bank(const std::string &name) : Container(name) {}
 
 std::ostream& Bank::toStream(std::ostream& os) const {
-
+    return Container::toStream(os << name << ": ");
 }
