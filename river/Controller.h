@@ -19,6 +19,10 @@ private:
     Bank* rightSide;
     Boat* boat;
 
+    Bank* leftSideSave;
+    Bank* rightSideSave;
+    Boat* boatSave;
+
 public:
     /**
      * Creates a new controller with its attributes
@@ -57,6 +61,16 @@ public:
      * @return The current controller
      */
     Controller& operator=(const Controller& c) = delete;
+
+    bool validateState();
+
+    bool boardPerson(Bank *bank, std::string name);
+
+    bool landPerson(Bank *bank, std::string name);
+
+    void movePerson(Container *from, Container *to, Person *person);
+
+    std::string saveState();
 };
 
 #endif //POO2_L3_RIVIERE_CONTROLLER_H

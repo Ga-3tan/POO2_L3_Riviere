@@ -7,6 +7,7 @@
 
 #include "Container.h"
 #include <utility>
+#include <algorithm>
 
 Container::Container(std::string name) :
         name(std::move(name)),
@@ -52,3 +53,11 @@ std::ostream& Container::toStream(std::ostream& os) const {
         os << p->getName() << " ";
     return os;
 }
+
+std::list<Person*>::const_iterator Container::findPerson(Person* person) const {
+    return std::find(begin(), end(), person);
+}
+
+//std::list<Person*>::const_iterator Container::findPerson(std::string person) const {
+//    return ;
+//}

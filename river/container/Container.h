@@ -79,6 +79,13 @@ public:
      * Gives the current container size
      */
     size_t size() const;
+
+    /**
+     * Find a person from by name
+     */
+    std::list<Person*>::const_iterator findPerson(Person* person) const;
+
+    std::list<Person*>::const_iterator findPerson(std::string name) const;
 };
 
 #endif //POO2_L3_RIVIERE_CONTAINER_H

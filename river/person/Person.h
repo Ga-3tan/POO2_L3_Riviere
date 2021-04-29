@@ -52,6 +52,10 @@ public:
      * Default destructor
      */
     virtual ~Person() = default;
+
+    bool operator==(const Person &rhs) const;
+
+    bool operator!=(const Person &rhs) const;
 };
 
 #endif //POO2_L3_RIVIERE_PERSON_H

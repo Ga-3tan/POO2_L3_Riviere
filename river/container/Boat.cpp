@@ -22,11 +22,13 @@ bool Boat::validateState() {
     }
 
     /* check if there is at least one driver */
-    bool hasDriver = false;
-    for (Person* p : people) if (p->canDrive()) hasDriver = true;
-    if (!hasDriver) {
-        std::cout << "There is driver on the boat" << std::endl;
-        return false;
+    if (size() == 2) {
+        bool hasDriver = false;
+        for (Person* p : people) if (p->canDrive()) hasDriver = true;
+        if (!hasDriver) {
+            std::cout << "There is no driver on the boat" << std::endl;
+            return false;
+        }
     }
 
     /* check if the people onboard can stay together */
