@@ -1,4 +1,6 @@
 #include <iostream>
+#include <vector>
+#include <sstream>
 #include "Controller.h"
 #include "person/Mother.h"
 #include "person/Father.h"
@@ -63,13 +65,110 @@ void Controller::display() {
          << "----------------------------------------------------------" << endl;
 }
 
-void Controller::nextTurn() {
-    // TODO
-    if (!turn) showMenu();
-    display();
-    Person* p = *leftSide->begin();
-    leftSide->remove(p);
-    rightSide->add(p);
-    string input;
-    cin >> input;
+string getNameFromInput(string& input) {
+    return input.substr(2);
 }
+
+//Person* findPerson(Container* container, const string& name) {
+//    auto it = std::find_if(container->begin(), container->end(), [&name](const Person* obj) {return obj->getName() == name;});
+//    if (it == container->end()) {
+//        std::cout << "Error : person not found" << std::endl;
+//        return nullptr;
+//    }
+//    return *it;
+//}
+
+string Controller::saveState() {
+    *boatSave = *boat;
+}
+
+bool Controller::validateState() {
+    return leftSide->validateState() && rightSide->validateState() && boat->validateState();
+}
+
+bool Controller::boardPerson(Bank* bank, string name) {
+    for (Person* p : *bank) {
+        if (p->getName() == name) {
+            movePerson(bank, boat, p);
+            if (!validateState()) { // revert change
+                movePerson(boat, bank, p);
+                return false;
+            }
+            return true;
+        }
+    }
+    return false;
+}
+
+bool Controller::landPerson(Bank* bank, string name) {
+    for (Person* p : *bank) {
+        if (p->getName() == name) {
+            movePerson(boat, bank, p);
+            if (!validateState()) { // revert change
+                movePerson(bank, boat, p);
+                return false;
+            }
+            return true;
+        }
+    }
+    return false;
+}
+
+void Controller::movePerson(Container* from, Container* to, Person* person) {
+    from->remove(person);
+    to->add(person);
+}
+
+void Controller::nextTurn() {
+    string input;
+
+    if (!turn++) showMenu();
+    display();
+
+    getline(cin, input, '\n');
+
+    switch (input.at(0)) {
+        case 'p': display(); break;
+        case 'e': {
+            string name = getNameFromInput(input);
+            if (boardPerson(leftSide,name)) break;
+            boardPerson(rightSide, name);
+            break;
+        }
+        case 'd': {
+            string name = getNameFromInput(input);
+            if (landPerson(leftSide,name)) break;
+            landPerson(rightSide, name);
+            break;
+        }
+        case 'm': {
+            if (boat->getBank() == leftSide) {
+                boat->setBank(rightSide);
+            } else {
+                boat->setBank(leftSide);
+            }
+            break;
+        }
+        case 'r': {
+            for (Person* p : *rightSide) {
+                movePerson(rightSide,leftSide,p);
+            }
+            for (Person* p : *boat) {
+                movePerson(boat, leftSide,p);
+            }
+            boat->setBank(leftSide);
+            break;
+        }
+        case 'q': {
+            exit(EXIT_SUCCESS);
+        }
+        case 'h': {
+            showMenu();
+            break;
+        }
+        default: cout << "unkown command" << endl;
+    }
+    cin.clear();
+}
+
+

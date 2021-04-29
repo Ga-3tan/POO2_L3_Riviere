@@ -17,3 +17,13 @@ bool Person::canDrive() const {
 std::string Person::getName() const {
     return name;
 }
+
+bool Person::operator==(const Person &rhs) const {
+    return name == rhs.name &&
+           isDriver == rhs.isDriver;
+}
+
+bool Person::operator!=(const Person &rhs) const {
+    return !(rhs == *this);
+}
+
