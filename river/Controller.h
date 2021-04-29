@@ -18,11 +18,6 @@ private:
     Bank* leftSide;
     Bank* rightSide;
     Boat* boat;
-
-    Bank* leftSideSave;
-    Bank* rightSideSave;
-    Boat* boatSave;
-
 public:
     /**
      * Creates a new controller with its attributes
@@ -66,11 +61,14 @@ public:
 
     bool boardPerson(Bank *bank, std::string name);
 
-    bool landPerson(Bank *bank, std::string name);
+    bool landPerson(std::string name);
 
     void movePerson(Container *from, Container *to, Person *person);
 
     std::string saveState();
+
+    void movePerson(Container *from, Container *to, Person *person,
+                    std::list<Person*>::iterator at);
 };
 
 #endif //POO2_L3_RIVIERE_CONTROLLER_H

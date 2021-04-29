@@ -14,6 +14,7 @@
 class Boat : public Container {
 private:
     Bank* bank;
+    bool canMove{false};
 public:
     /**
      * Constructs a new boat
@@ -48,6 +49,8 @@ public:
      * @return The current bank
      */
     Bank* getBank() const;
+
+    bool getCanMove() const;
 };
 
 #endif //POO2_L3_RIVIERE_BOAT_H

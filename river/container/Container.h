@@ -86,6 +86,8 @@ public:
     std::list<Person*>::const_iterator findPerson(Person* person) const;
 
     std::list<Person*>::const_iterator findPerson(std::string name) const;
+
+    void insertAt(Person *person, std::list<Person*>::iterator at);
 };
 
 #endif //POO2_L3_RIVIERE_CONTAINER_H
