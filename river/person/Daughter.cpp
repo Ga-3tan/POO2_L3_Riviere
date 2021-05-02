@@ -11,10 +11,8 @@ Daughter::Daughter(const std::string &name) : Child(name) {}
 
 bool Daughter::parentsPresence(bool mother, bool father) const {
     if ((father && !mother)) {
-        std::cout << "A daughter cannot be alone with the father if the mother is not present" << std::endl;
+        std::cout << "Fille avec son pere sans sa mere" << std::endl;
         return false;
-    } else {
+    } else
         return true;
-    }
-    // return !(father && !mother);
 }

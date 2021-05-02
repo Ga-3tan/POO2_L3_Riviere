@@ -11,6 +11,9 @@
 #include "Person.h"
 #include "../container/Container.h"
 
+/**
+ * Represends a child (cannot drive and depends on their parents)
+ */
 class Child : public Person {
 protected:
     /**

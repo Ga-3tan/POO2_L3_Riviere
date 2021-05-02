@@ -10,11 +10,14 @@
 
 class Person;
 
-#include <string>
 #include "../container/Container.h"
+#include <string>
 #include <typeinfo>
 #include <iostream>
 
+/**
+ * Main person class, represents a game player
+ */
 class Person {
 private:
     std::string name;
@@ -52,10 +55,6 @@ public:
      * Default destructor
      */
     virtual ~Person() = default;
-
-    bool operator==(const Person &rhs) const;
-
-    bool operator!=(const Person &rhs) const;
 };
 
 #endif //POO2_L3_RIVIERE_PERSON_H

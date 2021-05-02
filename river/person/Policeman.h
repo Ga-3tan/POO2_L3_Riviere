@@ -11,6 +11,9 @@
 #include <string>
 #include "Person.h"
 
+/**
+ * Represents the policeman (must watch over the robber)
+ */
 class Policeman : public Person {
 public:
     /**

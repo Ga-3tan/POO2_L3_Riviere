@@ -11,10 +11,12 @@
 #include "Container.h"
 #include "Bank.h"
 
+/**
+ * Represents a boat
+ */
 class Boat : public Container {
 private:
     Bank* bank;
-    bool canMove{false};
 public:
     /**
      * Constructs a new boat
@@ -29,7 +31,7 @@ public:
      * people inside the boat
      * @return The boolean if the container can stay in this state
      */
-    bool validateState() override;
+    bool validateState() const override;
 
     /**
      * Writes the container inside the given output stream
@@ -50,7 +52,11 @@ public:
      */
     Bank* getBank() const;
 
-    bool getCanMove() const;
+    /**
+     * Verifies that the boat contains a driver and can move
+     * @return Boolean if the boat has a driver
+     */
+    bool hasDriver() const;
 };
 
 #endif //POO2_L3_RIVIERE_BOAT_H

@@ -10,6 +10,9 @@
 
 #include "Container.h"
 
+/**
+ * Represents a river bank
+ */
 class Bank : public Container {
 public:
     /**

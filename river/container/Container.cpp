@@ -6,7 +6,6 @@
  */
 
 #include "Container.h"
-#include <utility>
 #include <algorithm>
 
 Container::Container(std::string name) :
@@ -39,7 +38,7 @@ std::size_t Container::size() const {
     return people.size();
 }
 
-bool Container::validateState() {
+bool Container::validateState() const {
     if (!people.empty()) {
         bool out = true;
         for (auto p : people) {
@@ -56,15 +55,6 @@ std::ostream& Container::toStream(std::ostream& os) const {
     return os;
 }
 
-std::list<Person*>::const_iterator Container::findPerson(Person* person) const {
-    return std::find(begin(), end(), person);
-}
-
-//std::list<Person*>::const_iterator Container::findPerson(std::string person) const {
-//    return ;
-//}
-
-// TODO list::insert ne peut pas prendre de const_iterator... changer en vector ? (vector::insert peut prendre const_iterator)
-void Container::insertAt(Person* person, std::list<Person*>::iterator at) {
-    people.insert(at, person);
+void Container::clear() noexcept {
+    people.clear();
 }

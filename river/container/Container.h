@@ -24,6 +24,9 @@ class Container;
  */
 std::ostream& operator<<(std::ostream& os, const Container& container);
 
+/**
+ * Represents a container of people
+ */
 class Container {
 protected:
     std::string name;
@@ -31,7 +34,7 @@ protected:
     std::list<Person*> people;
     /**
      * Creates a container with a given name
-     * @param name
+     * @param name The container name
      */
     Container(std::string name);
 public:
@@ -52,7 +55,7 @@ public:
      * stay with the others without breaking any constraint
      * @return The boolean if the container can stay in this state
      */
-    virtual bool validateState();
+    virtual bool validateState() const;
 
     /**
      * Writes the container inside the given output stream
@@ -81,13 +84,9 @@ public:
     size_t size() const;
 
     /**
-     * Find a person from by name
+     * Clears all the container content
      */
-    std::list<Person*>::const_iterator findPerson(Person* person) const;
-
-    std::list<Person*>::const_iterator findPerson(std::string name) const;
-
-    void insertAt(Person *person, std::list<Person*>::iterator at);
+    void clear() noexcept;
 };
 
 #endif //POO2_L3_RIVIERE_CONTAINER_H

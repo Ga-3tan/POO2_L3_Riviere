@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <sstream>
+#include <algorithm>
 #include "Controller.h"
 #include "person/Mother.h"
 #include "person/Father.h"
@@ -13,29 +14,27 @@ using namespace std;
 
 Controller::Controller() : turn(0),
                            leftSide(new Bank("Gauche")),
-                           rightSide(new Bank("Left")),
+                           rightSide(new Bank("Droite")),
                            boat(new Boat("Bateau", leftSide)) {
 
+    // Creates all the game players
+    players.push_back(new Father("pere"));
+    players.push_back(new Mother("mere"));
+    players.push_back(new Son("paul"));
+    players.push_back(new Son("pierre"));
+    players.push_back(new Daughter("julie"));
+    players.push_back(new Daughter("jeanne"));
+    players.push_back(new Policeman("policier"));
+    players.push_back(new Robber("voleur"));
+
     // Adds all the persons on the left bank
-    leftSide->add(new Father("pere"));
-    leftSide->add(new Mother("mere"));
-    leftSide->add(new Son("paul"));
-    leftSide->add(new Son("pierre"));
-    leftSide->add(new Daughter("julie"));
-    leftSide->add(new Daughter("jeanne"));
-    leftSide->add(new Policeman("policier"));
-    leftSide->add(new Robber("voleur"));
+    for (Person* p : players)
+        leftSide->add(p);
 }
 
 Controller::~Controller() {
-    // Removes every person in every bank and boat
-    for (Person *p : *leftSide)
-        delete p;
-
-    for (Person *p : *rightSide)
-        delete p;
-
-    for (Person *p : *boat)
+    // Removes every player
+    for (Person* p : players)
         delete p;
 
     // Deletes the baks and boat
@@ -73,123 +72,164 @@ void Controller::display() {
 }
 
 string getNameFromInput(string &input) {
+    if (input.size() < 2) return "";
     return input.substr(2);
 }
 
-//Person* findPerson(Container* container, const string& name) {
-//    auto it = std::find_if(container->begin(), container->end(), [&name](const Person* obj) {return obj->getName() == name;});
-//    if (it == container->end()) {
-//        std::cout << "Error : person not found" << std::endl;
-//        return nullptr;
-//    }
-//    return *it;
-//}
+Person* Controller::findPersonByName(const string& name) const {
+    // Searches in the list of persons
+    auto it = std::find_if(players.begin(), players.end(),
+               [&name](const Person* p) {return p->getName() == name;});
+    if (it == players.end()) {
+        cout << "La personne " << name << " n'existe pas" << endl;
+        return nullptr;
+    }
+    return *it;
+}
 
-bool Controller::validateState() {
+Container* Controller::findPersonContainer(Person* person) const {
+    vector<Container*> containers{leftSide, rightSide, boat};
+    for (Container* c : containers) {
+        auto it = std::find(c->begin(), c->end(), person);
+        if (it != c->end()) return c; // Returns the container
+    }
+
+    // Person not found in any container
+    cout << "La personne " << person->getName() << " n'est pas sur le jeu" << endl;
+    return nullptr;
+}
+
+bool Controller::validateState() const{
     return leftSide->validateState() && rightSide->validateState() &&
            boat->validateState();
 }
 
-bool Controller::boardPerson(Bank *bank, string name) {
-    if (boat->getBank() == bank) { // if the boat on the right bank
-        for (Person *p : *bank) {
-            if (p->getName() == name) {
-                movePerson(bank, boat, p);
-                if (!validateState()) { // revert change
-                    movePerson(boat, bank, p);
-                    return false;
-                }
-                return true;
-            }
-        }
+bool Controller::boardPerson(Person* p, Container* currentContainer) {
+    // checks if person is already on the boat
+    if (currentContainer == boat) {
+        cout << "La personne " << p->getName() <<
+             " est deja sur le bateau" << endl;
+        return false;
     }
-    return false;
+
+    // Checks if the boat is on the correct bank before boarding
+    if (boat->getBank() != currentContainer) {
+        cout << "La personne " << p->getName() <<
+        " n'est pas sur la meme rive que le bateau" << endl;
+        return false;
+    }
+
+    // Tries to make the move
+    return tryMovePerson(currentContainer, boat, p);
 }
 
-bool Controller::landPerson(string name) {
-    for (Person *p : *boat) {
-        if (p->getName() == name) {
-            movePerson(boat, boat->getBank(), p);
-            if (!validateState()) { // revert change
-                movePerson(boat->getBank(), boat, p);
-                return false;
-            }
-            return true;
-        }
+bool Controller::landPerson(Person* p, Container* currentContainer) {
+    // Checks if the person is on the boat
+    if (currentContainer != boat) {
+        cout << "La personne " << p->getName() <<
+        " n'est pas sur le bateau" << endl;
+        return false;
     }
-    return false;
+
+    // Tries to make the move
+    return tryMovePerson(boat, boat->getBank(), p);
 }
 
-void Controller::movePerson(Container *from, Container *to, Person *person) {
+bool Controller::tryMovePerson(Container *from,
+                               Container *to,
+                               Person *person) const {
+    // Tries to move the person on the boat and checks the containers states
     from->remove(person);
     to->add(person);
+
+    // Validates the states
+    if (validateState())
+        return true;
+
+    // Illegal state, reverts the changes
+    to->remove(person);
+    from->add(person);
+    return false;
 }
 
-// TODO peut être merge avec celui du haut en mettant un paramètre at par défaut à end(), voir Container::insertAt
-void Controller::movePerson(Container *from, Container *to, Person *person,
-                            std::list<Person *>::iterator at /*= to->end() impossible car end retourne un const_iterator*/ ) {
-    from->remove(person);
-    to->insertAt(person, at);
-}
-
-void Controller::nextTurn() {
+bool Controller::nextTurn() {
+    // Takes user input
+    cout << turn << "> ";
     string input;
-
-    if (!turn++) showMenu();
-    display();
-
     getline(cin, input, '\n');
+    cin.clear();
 
+    // Input validation
+    if (input.empty()) return false;
+
+    // Retrieves the person and its container
+    Person* person = nullptr;
+    Container* currentContainer = nullptr;
+    if (input.at(0) == 'e' || input.at(0) == 'd') {
+        // Retrieves the person
+        person = findPersonByName(getNameFromInput(input));
+        if (person == nullptr) return false;
+
+        // Retrieves the person current container
+        currentContainer = findPersonContainer(person);
+        if (currentContainer == nullptr) return false;
+    }
+
+    // Validates the command input
     switch (input.at(0)) {
         case 'p':
             display();
             break;
-        case 'e': {
-            string name = getNameFromInput(input);
-            if (boardPerson(leftSide, name)) break;
-            boardPerson(rightSide, name);
+        case 'e':
+            if (!boardPerson(person, currentContainer)) return false;
             break;
-        }
-        case 'd': {
-            string name = getNameFromInput(input);
-            landPerson(name);
+        case 'd':
+            if (!landPerson(person, currentContainer)) return false;
             break;
-        }
-        case 'm': {
-            if (boat->size() == 0) {
-                std::cout << "The boat is empty" << std::endl;
-            } else if (boat->getCanMove()) {
-                if (boat->getBank() == leftSide) {
+        case 'm':
+            if (boat->hasDriver()) {
+                if (boat->getBank() == leftSide)
                     boat->setBank(rightSide);
-                } else {
+                else
                     boat->setBank(leftSide);
-                }
             } else {
-                std::cout << "There is no driver on the boat" << std::endl;
+                std::cout << "Aucun conducteur present sur le bateau" << std::endl;
+                return false;
             }
             break;
-        }
-        case 'r': {
-            for (Person *p : *rightSide) {
-                movePerson(rightSide, leftSide, p);
-            }
-            for (Person *p : *boat) {
-                movePerson(boat, leftSide, p);
-            }
-            boat->setBank(leftSide);
+        case 'r':
+            // Clears all containers
+            leftSide->clear();
+            rightSide->clear();
+            boat->clear();
+
+            // Adds all the persons on the left bank
+            for (Person* p : players)
+                leftSide->add(p);
+
+            turn = -1;
             break;
-        }
-        case 'q': {
+        case 'q':
             exit(EXIT_SUCCESS);
-        }
-        case 'h': {
+        case 'h':
             showMenu();
-            break;
-        }
+            cout << endl;
+            return false;
         default:
-            cout << "unkown command" << endl;
+            cout << "Commande inconnue" << endl;
+            return false;
     }
-    cin.clear();
+
+    display();
+    cout << endl;
+    ++turn;
+
+    // Checks end of game
+    if (rightSide->size() == players.size()) {
+        cout << "Partie terminee, felicitations !" << endl;
+        return true;
+    }
+
+    // Game not over, continues
+    return false;
 }
-
-
