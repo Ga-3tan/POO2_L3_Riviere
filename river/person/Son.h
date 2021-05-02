@@ -11,6 +11,9 @@
 #include <string>
 #include "Child.h"
 
+/**
+ * Represents a son (cannot be left alone with the mother)
+ */
 class Son : public Child {
 public:
     /**

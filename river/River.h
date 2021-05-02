@@ -8,11 +8,15 @@
 #ifndef POO2_L3_RIVIERE_RIVER_H
 #define POO2_L3_RIVIERE_RIVER_H
 
-#include "Controller.h"
-
+/**
+ * Main program class
+ */
 class River {
 public:
-    void start();
+    /**
+     * Starts the game
+     */
+    static void start();
 };
 
 #endif //POO2_L3_RIVIERE_RIVER_H

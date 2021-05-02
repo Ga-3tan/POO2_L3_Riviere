@@ -11,6 +11,9 @@
 #include "Container.h"
 #include "Bank.h"
 
+/**
+ * Represents a boat
+ */
 class Boat : public Container {
 private:
     Bank* bank;
@@ -28,7 +31,7 @@ public:
      * people inside the boat
      * @return The boolean if the container can stay in this state
      */
-    bool validateState() override;
+    bool validateState() const override;
 
     /**
      * Writes the container inside the given output stream
@@ -48,6 +51,12 @@ public:
      * @return The current bank
      */
     Bank* getBank() const;
+
+    /**
+     * Verifies that the boat contains a driver and can move
+     * @return Boolean if the boat has a driver
+     */
+    bool hasDriver() const;
 };
 
 #endif //POO2_L3_RIVIERE_BOAT_H

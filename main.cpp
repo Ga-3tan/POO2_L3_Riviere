@@ -5,11 +5,9 @@
  * Date     : 14.04.2021
  */
 
-#include <iostream>
 #include "river/River.h"
 
 int main() {
-    River river;
-    river.start();
+    River::start();
     return 0;
 }

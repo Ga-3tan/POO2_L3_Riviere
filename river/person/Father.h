@@ -11,6 +11,9 @@
 #include <string>
 #include "Person.h"
 
+/**
+ * Represents the father
+ */
 class Father : public Person {
 public:
     /**

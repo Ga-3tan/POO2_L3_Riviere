@@ -6,7 +6,7 @@
  */
 
 #include "Container.h"
-#include <utility>
+#include <algorithm>
 
 Container::Container(std::string name) :
         name(std::move(name)),
@@ -38,17 +38,23 @@ std::size_t Container::size() const {
     return people.size();
 }
 
-bool Container::validateState() {
+bool Container::validateState() const {
     if (!people.empty()) {
+        bool out = true;
         for (auto p : people) {
-            p->canStayWith(*this);
+            out = out && p->canStayWith(*this);
         }
+        return out;
     }
-    return false;
+    return true;
 }
 
 std::ostream& Container::toStream(std::ostream& os) const {
     for (Person* p : people)
         os << p->getName() << " ";
     return os;
+}
+
+void Container::clear() noexcept {
+    people.clear();
 }
