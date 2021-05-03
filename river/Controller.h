@@ -45,10 +45,6 @@ public:
 
     /**
      * Starts the next turn
-     */
-
-    /**
-     * Starts the next turn
      * @return True if game is over
      */
     bool nextTurn();

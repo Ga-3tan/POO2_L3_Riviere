@@ -30,7 +30,6 @@ std::ostream& operator<<(std::ostream& os, const Container& container);
 class Container {
 protected:
     std::string name;
-protected:
     std::list<Person*> people;
     /**
      * Creates a container with a given name
