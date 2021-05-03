@@ -9,12 +9,11 @@
 #include "Controller.h"
 
 void River::start() {
-    Controller riverGame;
 
     // Initial display
-    riverGame.showMenu();
-    riverGame.display();
+    Controller::getInstance().showMenu();
+    Controller::getInstance().display();
     std::cout << std::endl;
 
-    while (!riverGame.nextTurn());
+    while (!Controller::getInstance().nextTurn());
 }

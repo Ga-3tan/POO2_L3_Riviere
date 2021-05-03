@@ -13,7 +13,7 @@
 #include "container/Boat.h"
 
 /**
- * Manages all the game mechanics
+ * Manages all the game mechanics, is singleton
  */
 class Controller {
 private:
@@ -22,45 +22,11 @@ private:
     Bank* leftSide;
     Bank* rightSide;
     Boat* boat;
-public:
+
     /**
      * Creates a new controller with its attributes
      */
     Controller();
-
-    /**
-     * Deletes the dynamically attributes pointers
-     */
-    ~Controller();
-
-    /**
-     * Shows the game menu
-     */
-    void showMenu();
-
-    /**
-     * Displays the game state
-     */
-    void display();
-
-    /**
-     * Starts the next turn
-     * @return True if game is over
-     */
-    bool nextTurn();
-
-    /**
-     * Forbidden function, the class is a singleton
-     * @param c The controller to copy
-     */
-    Controller(const Controller& c) = delete;
-
-    /**
-     * Forbidden function, the class is a singleton
-     * @param c The controller to copy
-     * @return The current controller
-     */
-    Controller& operator=(const Controller& c) = delete;
 
     /**
      * Finds a person by its textual name
@@ -108,6 +74,47 @@ public:
      * @return True if the person was successfully moved, false otherwise
      */
     bool tryMovePerson(Container *from, Container *to, Person *person) const;
+public:
+
+    /**
+     * Retrieves the singleton instance of the game class
+     * @return
+     */
+    static Controller& getInstance();
+
+    /**
+     * Deletes the dynamically attributes pointers
+     */
+    ~Controller();
+
+    /**
+     * Shows the game menu
+     */
+    void showMenu();
+
+    /**
+     * Displays the game state
+     */
+    void display();
+
+    /**
+     * Starts the next turn
+     * @return True if game is over
+     */
+    bool nextTurn();
+
+    /**
+     * Forbidden function, the class is a singleton
+     * @param c The controller to copy
+     */
+    Controller(const Controller& c) = delete;
+
+    /**
+     * Forbidden function, the class is a singleton
+     * @param c The controller to copy
+     * @return The current controller
+     */
+    Controller& operator=(const Controller& c) = delete;
 };
 
 #endif //POO2_L3_RIVIERE_CONTROLLER_H
