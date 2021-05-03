@@ -76,7 +76,7 @@ void Controller::display() {
          << "----------------------------------------------------------" << endl;
 }
 
-string getNameFromInput(string &input) {
+string Controller::getNameFromInput(string &input) {
     if (input.size() < 2) return "";
     return input.substr(2);
 }

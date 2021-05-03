@@ -74,6 +74,15 @@ private:
      * @return True if the person was successfully moved, false otherwise
      */
     bool tryMovePerson(Container *from, Container *to, Person *person) const;
+
+    /**
+     * return the name from the input, checks if the size of the input is > 2,
+     * then remove the command char with the space and return the name
+     * @param input The input with a name from the user
+     * @return A string of the name from the user input
+     */
+    static std::string getNameFromInput(std::string &input);
+
 public:
 
     /**
