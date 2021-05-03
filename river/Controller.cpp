@@ -179,7 +179,7 @@ bool Controller::nextTurn() {
     switch (input.at(0)) {
         case 'p':
             display();
-            break;
+            return false;
         case 'e':
             if (!boardPerson(person, currentContainer)) return false;
             break;
