@@ -178,7 +178,31 @@
     </entity>
     <entity entityType="CLASS" id="6655" isAbstract="false" name="Controller" visibility="PUBLIC">
       <attribute const="false" defaultValue="" isStatic="false" name="turn" type="size_t" visibility="PRIVATE"/>
-      <method is-constructor="true" isAbstract="false" isStatic="false" name="Controller" returnType="" view="DEFAULT" visibility="PUBLIC"/>
+      <method is-constructor="true" isAbstract="false" isStatic="false" name="Controller" returnType="" view="DEFAULT" visibility="PRIVATE"/>
+      <method isAbstract="false" isStatic="false" name="findPersonByName" returnType="Person*" view="DEFAULT" visibility="PRIVATE">
+        <variable const="false" name="name" type="string"/>
+      </method>
+      <method isAbstract="false" isStatic="false" name="findPersonContainer" returnType="Container*" view="DEFAULT" visibility="PRIVATE">
+        <variable const="false" name="person" type="Person*"/>
+      </method>
+      <method isAbstract="false" isStatic="false" name="validateState" returnType="bool" view="DEFAULT" visibility="PRIVATE"/>
+      <method isAbstract="false" isStatic="false" name="boardPerson" returnType="bool" view="DEFAULT" visibility="PRIVATE">
+        <variable const="false" name="p" type="Person*"/>
+        <variable const="false" name="currentContainer" type="Container*"/>
+      </method>
+      <method isAbstract="false" isStatic="false" name="landPerson" returnType="bool" view="DEFAULT" visibility="PRIVATE">
+        <variable const="false" name="p" type="Person*"/>
+        <variable const="false" name="currentContainer" type="Container*"/>
+      </method>
+      <method isAbstract="false" isStatic="false" name="tryMovePerson" returnType="bool" view="DEFAULT" visibility="PRIVATE">
+        <variable const="false" name="from" type="Container*"/>
+        <variable const="false" name="to" type="Container*"/>
+        <variable const="false" name="person" type="Person*"/>
+      </method>
+      <method isAbstract="false" isStatic="true" name="getNameFromInput" returnType="string" view="DEFAULT" visibility="PRIVATE">
+        <variable const="false" name="input" type="string&amp;"/>
+      </method>
+      <method isAbstract="false" isStatic="true" name="getInstance" returnType="Controller&amp;" view="DEFAULT" visibility="PUBLIC"/>
       <method is-constructor="true" isAbstract="false" isStatic="false" name="~Controller" returnType="" view="DEFAULT" visibility="PUBLIC"/>
       <method isAbstract="false" isStatic="false" name="showMenu" returnType="void" view="DEFAULT" visibility="PUBLIC"/>
       <method isAbstract="false" isStatic="false" name="display" returnType="void" view="DEFAULT" visibility="PUBLIC"/>
@@ -187,27 +211,7 @@
         <variable const="false" name="c" type="Controller&amp;"/>
       </method>
       <method isAbstract="false" isStatic="false" name="operator=" returnType="Controller&amp;" view="DEFAULT" visibility="PUBLIC">
-        <variable const="false" name="controller" type="Controller&amp;"/>
-      </method>
-      <method isAbstract="false" isStatic="false" name="findPersonByName" returnType="Person*" view="DEFAULT" visibility="PUBLIC">
-        <variable const="false" name="name" type="string"/>
-      </method>
-      <method isAbstract="false" isStatic="false" name="findPersonContainer" returnType="Container*" view="DEFAULT" visibility="PUBLIC">
-        <variable const="false" name="person" type="Person*"/>
-      </method>
-      <method isAbstract="false" isStatic="false" name="validateState" returnType="bool" view="DEFAULT" visibility="PUBLIC"/>
-      <method isAbstract="false" isStatic="false" name="boardPerson" returnType="bool" view="DEFAULT" visibility="PUBLIC">
-        <variable const="false" name="p" type="Person*"/>
-        <variable const="false" name="currentContainer" type="Container*"/>
-      </method>
-      <method isAbstract="false" isStatic="false" name="landPerson" returnType="bool" view="DEFAULT" visibility="PUBLIC">
-        <variable const="false" name="p" type="Person*"/>
-        <variable const="false" name="currentContainer" type="Container*"/>
-      </method>
-      <method isAbstract="false" isStatic="false" name="tryMovePerson" returnType="bool" view="DEFAULT" visibility="PUBLIC">
-        <variable const="false" name="from" type="Container*"/>
-        <variable const="false" name="to" type="Container*"/>
-        <variable const="false" name="person" type="Person*"/>
+        <variable const="false" name="c" type="Controller&amp;"/>
       </method>
     </entity>
     <entity entityType="CLASS" id="6654" isAbstract="false" name="Bank" visibility="PUBLIC">
@@ -294,19 +298,19 @@
       </roleAssociation>
       <roleAssociation>
         <x>804</x>
-        <y>495</y>
+        <y>496</y>
         <w>0</w>
         <h>16</h>
       </roleAssociation>
       <multipliciteAssociation>
-        <x>871</x>
-        <y>470</y>
+        <x>878</x>
+        <y>472</y>
         <w>8</w>
         <h>16</h>
       </multipliciteAssociation>
       <multipliciteAssociation>
         <x>804</x>
-        <y>467</y>
+        <y>468</y>
         <w>8</w>
         <h>16</h>
       </multipliciteAssociation>
@@ -349,8 +353,8 @@
         <h>16</h>
       </roleAssociation>
       <multipliciteAssociation>
-        <x>908</x>
-        <y>634</y>
+        <x>877</x>
+        <y>633</y>
         <w>8</w>
         <h>16</h>
       </multipliciteAssociation>
@@ -423,11 +427,11 @@
         </point>
         <point>
           <x>865</x>
-          <y>262</y>
+          <y>284</y>
         </point>
         <point>
           <x>701</x>
-          <y>262</y>
+          <y>284</y>
         </point>
       </line>
       <labelAssociation>
@@ -444,7 +448,7 @@
       </roleAssociation>
       <roleAssociation>
         <x>695</x>
-        <y>263</y>
+        <y>288</y>
         <w>0</w>
         <h>16</h>
       </roleAssociation>
@@ -455,8 +459,8 @@
         <h>16</h>
       </multipliciteAssociation>
       <multipliciteAssociation>
-        <x>687</x>
-        <y>237</y>
+        <x>708</x>
+        <y>261</y>
         <w>8</w>
         <h>16</h>
       </multipliciteAssociation>
@@ -663,8 +667,8 @@
         <h>16</h>
       </multipliciteAssociation>
       <multipliciteAssociation>
-        <x>1668</x>
-        <y>421</y>
+        <x>1665</x>
+        <y>417</y>
         <w>21</w>
         <h>16</h>
       </multipliciteAssociation>
@@ -746,7 +750,7 @@
         <x>889</x>
         <y>423</y>
         <w>452</w>
-        <h>265</h>
+        <h>295</h>
       </geometry>
     </componentView>
     <componentView color="-2079" componentID="6664" displayAttributes="true" displayDefault="true" displayMethods="true">
@@ -813,13 +817,5 @@
         <h>100</h>
       </geometry>
     </componentView>
-    <note color="-2079" content="validateState() -&gt; vérifier nombre de place et conducteur">
-      <noteGeometry>
-        <x>110</x>
-        <y>482</y>
-        <w>120</w>
-        <h>75</h>
-      </noteGeometry>
-    </note>
   </umlView>
 </classDiagram>
