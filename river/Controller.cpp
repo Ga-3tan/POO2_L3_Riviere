@@ -12,6 +12,11 @@
 
 using namespace std;
 
+Controller& Controller::getInstance() {
+    static Controller instance;
+    return instance;
+}
+
 Controller::Controller() : turn(0),
                            leftSide(new Bank("Gauche")),
                            rightSide(new Bank("Droite")),
